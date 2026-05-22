@@ -1,5 +1,5 @@
 class UrlContainer {
-  static const String domainUrl = 'https://YOUR_PERFEX_CRM_URL.com';
+  static const String domainUrl = 'https://st.portomicro.com.br';
   static const String baseUrl = '$domainUrl/api/';
 
   static RegExp emailValidatorRegExp =
