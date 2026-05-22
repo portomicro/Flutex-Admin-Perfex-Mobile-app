@@ -11,7 +11,7 @@ jobs:
       - name: Baixar codigo fonte
         uses: actions/checkout@v4
         with:
-          submodules: 'recursive' # Força o GitHub a baixar as subpastas como flutex_admin
+          fetch-depth: 0 # Baixa todo o histórico para encontrar os arquivos ocultos
 
       - name: Configurar Java
         uses: actions/setup-java@v4
