@@ -1,0 +1,41 @@
+name: Gerar APK PortoMicro CRM
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar codigo fonte
+        uses: actions/checkout@v4
+        with:
+          submodules: 'recursive' # Força o GitHub a baixar as subpastas como flutex_admin
+
+      - name: Configurar Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Configurar Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+
+      - name: Baixar dependencias do pubspec
+        run: |
+          cd flutex_admin
+          flutter pub get
+
+      - name: Compilar APK
+        run: |
+          cd flutex_admin
+          flutter build apk --release
+
+      - name: Disponibilizar APK para download
+        uses: actions/upload-artifact@v4
+        with:
+          name: PortoMicro-CRM-APK
+          path: flutex_admin/build/app/outputs/flutter-apk/app-release.apk
